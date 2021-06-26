@@ -1,4 +1,4 @@
-const customerModal = require('../modal/customerModal');
+const customerModal = require('../models/customerModal');
 const nodeMailer = require('nodemailer');
 
 const createCustomer = async (req, res) => {
