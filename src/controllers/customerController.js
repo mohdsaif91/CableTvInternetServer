@@ -3,9 +3,7 @@ const nodeMailer = require('nodemailer');
 
 const createCustomer = async (req, res) => {
 	try {
-		console.log(req.body);
 		await customerModal.create(req.body, (err, data) => {
-			console.log(data);
 			if (err) {
 				throw err;
 			}
@@ -33,18 +31,13 @@ const createCustomer = async (req, res) => {
 			};
 			transporter.sendMail(mailOptions, (error, info) => {
 				if (error) {
-					console.log(error, '<>', info);
-					// res.send('error'); // if error occurs send error as response to client
-				} else {
-					console.log('Email sent: ' + info.response);
-					// res.send('Sent Successfully'); //if mail is sent successfully send Sent successfully as response
+					// console.log(error, '<>', info);
+					throw error; // if error occurs send error as response to client
 				}
 			});
 			res.status(201).send(data);
 		});
 	} catch (error) {
-		console.log('----------------------- catch block');
-		console.log(error);
 		res.status(500).send(error);
 	}
 };
