@@ -40,10 +40,12 @@ const createCustomer = async (req, res) => {
 					// res.send('Sent Successfully'); //if mail is sent successfully send Sent successfully as response
 				}
 			});
+			res.status(201).send(data);
 		});
 	} catch (error) {
 		console.log('----------------------- catch block');
 		console.log(error);
+		res.status(500).send(error);
 	}
 };
 
