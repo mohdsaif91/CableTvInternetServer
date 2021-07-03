@@ -1,6 +1,15 @@
 const customerModal = require('../models/customerModal');
 const nodeMailer = require('nodemailer');
 
+const getCustomer = async (req, res) => {
+	try {
+		const customer = await customerModal.find().sort({ createdAt: -1 });
+		res.status(200).send(customer);
+	} catch (error) {
+		res.status(500).send(error);
+	}
+};
+
 const createCustomer = async (req, res) => {
 	try {
 		await customerModal.create(req.body, (err, data) => {
@@ -42,4 +51,4 @@ const createCustomer = async (req, res) => {
 	}
 };
 
-module.exports = { createCustomer };
+module.exports = { createCustomer, getCustomer };

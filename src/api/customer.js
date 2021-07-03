@@ -4,10 +4,7 @@ const CustomerController = require('../controllers/customerController');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-	res.json(['😀', '😳', '🙄']);
-});
-
 router.post('/add', CustomerController.createCustomer);
+router.get('/', CustomerController.getCustomer);
 
 module.exports = router;

@@ -4,11 +4,11 @@ const CustomerSchema = mongoose.Schema({
 	fullName: { type: String, required: true },
 	email: {
 		type: String,
-		required:true
+		required: true,
 	},
 	phoneNumber: {
 		type: Number,
-		required:true,
+		required: true,
 		validate: {
 			validator: (v) => {
 				return /^\d{10}$/.test(v);
