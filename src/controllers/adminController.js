@@ -1,4 +1,7 @@
+const moment = require('moment');
+const { format } = require('morgan');
 const AdminModal = require('../models/admin');
+const customerModal = require('../models/customerModal');
 
 const logIn = async (req, res) => {
 	try {
@@ -34,4 +37,21 @@ const createUser = async (req, res) => {
 	}
 };
 
-module.exports = { logIn, createUser };
+const getDataWithDates = async (req, res) => {
+	try {
+		const { startDate, endDate } = req.params;
+		const cust = await customerModal
+			.find({
+				createdAt: {
+					$gte: startDate,
+					$lte: endDate,
+				},
+			})
+			.sort({ createdAt: -1 });
+		res.status(200).send(cust);
+	} catch (error) {
+		res.status(500).send(error);
+	}
+};
+
+module.exports = { logIn, createUser, getDataWithDates };
